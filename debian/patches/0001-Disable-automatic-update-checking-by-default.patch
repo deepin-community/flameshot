@@ -1,0 +1,24 @@
+From: Boyuan Yang <byang@debian.org>
+Date: Sat, 18 Jun 2022 10:07:41 -0400
+Subject: Disable automatic update checking by default
+
+Forwarded: https://github.com/flameshot-org/flameshot/issues/1706
+Bug-Debian: https://bugs.debian.org/991392
+Last-Update: 2022-06-18
+---
+ src/utils/confighandler.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/utils/confighandler.cpp b/src/utils/confighandler.cpp
+index 657e896..e19dbdb 100644
+--- a/src/utils/confighandler.cpp
++++ b/src/utils/confighandler.cpp
+@@ -79,7 +79,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
+     OPTION("showDesktopNotification"     ,Bool               ( true          )),
+     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
+     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
+-    OPTION("checkForUpdates"             ,Bool               ( true          )),
++    OPTION("checkForUpdates"             ,Bool               ( false          )),
+     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
+     OPTION("showMagnifier"               ,Bool               ( false         )),
+     OPTION("squareMagnifier"             ,Bool               ( false         )),

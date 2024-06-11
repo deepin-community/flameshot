@@ -1,15 +1,36 @@
-Source: template-repository
-Section: unknown
+Source: flameshot
+Section: graphics
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends:
+ cmake,
+ debhelper-compat (= 13),
+ libqt5svg5-dev,
+ libsingleapplication-dev,
+ qtbase5-dev,
+ qttools5-dev,
+ qttools5-dev-tools,
+Rules-Requires-Root: no
+Standards-Version: 4.6.2
+Homepage: https://flameshot.org
+Vcs-Browser: https://salsa.debian.org/debian/flameshot
+Vcs-Git: https://salsa.debian.org/debian/flameshot.git
 
-Package: template-repository
+Package: flameshot
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends:
+ hicolor-icon-theme,
+ libqt5svg5,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Recommends:
+ xdg-desktop-portal-gtk | xdg-desktop-portal-gnome | xdg-desktop-portal-kde | xdg-desktop-portal-wlr,
+ grim,
+Suggests:
+ ca-certificates,
+ openssl,
+Description: Powerful yet simple-to-use screenshot software
+ Flameshot is a powerful yet simple-to-use screenshot software.
+ Notable features include customizable appearance, in-app screenshot editing,
+ D-Bus interface, experimental GNOME/KDE Wayland support, integration with
+ Imgur and support for both GUI and CLI interface.

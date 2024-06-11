@@ -1,0 +1,46 @@
+From: Boyuan Yang <byang@debian.org>
+Date: Sat, 18 Jun 2022 10:10:28 -0400
+Subject: Use debian version str in about window
+
+---
+ src/CMakeLists.txt         | 6 ++++++
+ src/utils/globalvalues.cpp | 4 ++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 2dd49c3..ff96547 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -249,6 +249,12 @@ endif()
+ message("Flameshot predefined color palette large: " ${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+ target_compile_definitions(flameshot PRIVATE PREDEFINED_COLOR_PALETTE_LARGE=${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+ 
++if (FLAMESHOT_ABOUT_DEB_VERSION)
++    target_compile_definitions(flameshot PRIVATE FLAMESHOT_ABOUT_DEB_VERSION="${FLAMESHOT_ABOUT_DEB_VERSION}")
++else ()
++    target_compile_definitions(flameshot PRIVATE FLAMESHOT_ABOUT_DEB_VERSION="${PROJECT_VERSION}")
++endif ()
++
+ find_package (Git)
+ if (GIT_FOUND)
+     message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
+diff --git a/src/utils/globalvalues.cpp b/src/utils/globalvalues.cpp
+index fe94354..8dd8338 100644
+--- a/src/utils/globalvalues.cpp
++++ b/src/utils/globalvalues.cpp
+@@ -12,7 +12,7 @@ int GlobalValues::buttonBaseSize()
+ 
+ QString GlobalValues::versionInfo()
+ {
+-    return QStringLiteral("Flameshot " APP_VERSION " (" FLAMESHOT_GIT_HASH ")"
++    return QStringLiteral("Flameshot " APP_VERSION " (Debian " FLAMESHOT_ABOUT_DEB_VERSION ")"
+                           "\nCompiled with Qt " QT_VERSION_STR);
+ }
+ 
+@@ -32,4 +32,4 @@ QString GlobalValues::iconPathPNG()
+ #else
+     return { ":img/app/flameshot.png" };
+ #endif
+-}
+\ No newline at end of file
++}
